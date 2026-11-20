@@ -6,33 +6,43 @@ The API is designed for applications such as **e-commerce checkout forms**, wher
 
 ## ✨ Features
 
-- 🔎 Look up a location using a 6-digit pincode
-- 📦 Perform bulk pincode lookups
-- 🇹🇿 Tanzania-focused location data
-- ✅ Automatic pincode validation using Pydantic
-- ⚡ Fast API powered by FastAPI
-- 🛡️ Custom error handling for invalid and unknown pincodes
-- 📚 Interactive API documentation through FastAPI
-- 🧩 Easy to integrate with checkout and address forms
+- 🖥️ **Interactive Web Front End**: Responsive web dashboard with Tanzanian design aesthetics (dark/light themes).
+- 🔎 **Single Pincode Lookup**: Instant digit-by-digit validation and location card with 1-click address copy.
+- 🛒 **Checkout Autofill Simulator**: Live interactive e-commerce checkout showing automated region and district autofill with dynamic shipping rates.
+- 📦 **Bulk Pincode Lookup**: Verify up to 10 postal codes at once with real-time stats and CSV/JSON export.
+- 🗺️ **Postal Directory Explorer**: Browse and filter registered Tanzanian postal codes by region and city.
+- ⚡ **API Playground**: Live request console with response inspection and latency ping.
+- 🇹🇿 **Tanzania-focused location data**: Dar es Salaam, Arusha, Dodoma, Mwanza, Zanzibar, Kilimanjaro, Tanga, Mbeya, and more.
+- ✅ **Automatic validation**: Pydantic models for format and length checks.
+- ⚡ **Fast API powered by FastAPI**: High performance ASGI backend with CORS support.
+- 🛡️ **Custom error handling**: Informative JSON responses for invalid and unknown pincodes.
+- 📚 **Interactive API documentation**: Swagger UI and ReDoc included out of the box.
 
 ## 🛠️ Tech Stack
 
-- **Python**
+- **Python 3**
 - **FastAPI**
-- **Pydantic**
+- **Pydantic v2**
 - **Uvicorn**
+- **Modern JavaScript (ES6+)**
+- **HTML5 & Responsive CSS3** (Custom Tanzanian design system, dark/light modes)
 
 ## 📁 Project Structure
 
 ```text
-emtaa/
+Tanzania Pincodes Lookup/
 │
-├── main.py             # FastAPI application and API routes
-├── models.py           # Pydantic request/response models
-├── data.py             # Pincode and location data
-├── exceptions.py       # Custom exceptions and handlers
-├── requirements.txt    # Python dependencies
-├── Scripts/            # Virtual environment scripts
+├── frontend/               # Modern responsive web dashboard
+│   ├── index.html          # SPA layout (Single lookup, checkout demo, bulk, directory, playground)
+│   ├── styles.css          # Theme styles, glassmorphism, responsive grid, animations
+│   └── app.js              # State management, offline fallbacks, API integration
+│
+├── main.py                 # FastAPI application, static file mounts & API routes
+├── models.py               # Pydantic request/response models
+├── data.py                 # Pincode database records
+├── exceptions.py           # Custom exceptions and error handlers
+├── requirements.txt        # Python dependencies
+├── Scripts/                # Virtual environment scripts
 ├── .gitignore
 └── README.md
 ```
@@ -257,21 +267,20 @@ Before using the API in production, consider:
 - Adding CORS configuration for frontend applications
 - Adding proper deployment configuration
 
-## 🔮 Future Improvements
+## 🔮 Improvements & Roadmap
 
-Potential improvements include:
-
-- [ ] Add complete Tanzanian postal-code dataset
-- [ ] Add database support
-- [ ] Add automated tests
-- [ ] Add CORS configuration
-- [ ] Add API authentication
-- [ ] Add rate limiting
+- [x] Add interactive web frontend dashboard
+- [x] Add frontend e-commerce checkout autofill demo
+- [x] Add bulk pincode lookup with CSV/JSON export
+- [x] Add postal directory explorer with search and region filters
+- [x] Add CORS configuration for cross-origin frontend requests
+- [x] Add developer API playground with code snippet generation (cURL, JS, Python)
+- [x] Expand Tanzanian postal zones dataset
+- [ ] Add complete national postal-code dataset (Posta Tanzania)
+- [ ] Add persistent database support (PostgreSQL / SQLite)
+- [ ] Add automated test suite
+- [ ] Add rate limiting and caching
 - [ ] Add Docker support
-- [ ] Add deployment configuration
-- [ ] Add API versioning
-- [ ] Add search by region, city, or district
-- [ ] Add frontend checkout demo
 
 ## 🤝 Contributing
 

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tanzania Pincodes Lookup | Huduma ya Misimbo ya Posta</title>
+  <meta name="description" content="Fast, reliable Tanzanian postal code lookup and checkout autofill service for regions, cities, and districts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+  <!-- Top Announcement / Status Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="flag-icon" title="United Republic of Tanzania">
+          <span class="flag-stripe green"></span>
+          <span class="flag-stripe yellow-top"></span>
+          <span class="flag-stripe black"></span>
+          <span class="flag-stripe yellow-bottom"></span>
+          <span class="flag-stripe blue"></span>
+        </div>
+        <div class="brand-text">
+          <h1>Tanzania Pincodes <span>Lookup</span></h1>
+          <p class="brand-subtitle">Huduma ya Misimbo ya Posta Tanzania</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="api-status-badge" id="apiStatusBadge">
+          <span class="status-dot pulsing"></span>
+          <span id="apiStatusText">Checking API...</span>
+          <span class="latency-pill" id="latencyPill" style="display:none;">--ms</span>
+        </div>
+
+        <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="https://github.com/Ibrahist/emtaa" target="_blank" rel="noopener noreferrer" class="btn btn-github btn-sm" title="View Source on GitHub">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <a href="/docs" target="_blank" class="btn btn-outline btn-sm docs-link" title="Open Swagger UI API Documentation">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Swagger Docs</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs-wrapper">
+      <div class="nav-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="lookup" role="tab" aria-selected="true">
+          <span class="tab-icon">🔍</span>
+          <span>Single Lookup</span>
+        </button>
+        <button class="tab-btn" data-tab="checkout" role="tab" aria-selected="false">
+          <span class="tab-icon">🛒</span>
+          <span>Checkout Autofill Demo</span>
+          <span class="badge-accent">Demo</span>
+        </button>
+        <button class="tab-btn" data-tab="bulk" role="tab" aria-selected="false">
+          <span class="tab-icon">📦</span>
+          <span>Bulk Lookup</span>
+        </button>
+        <button class="tab-btn" data-tab="directory" role="tab" aria-selected="false">
+          <span class="tab-icon">🗺️</span>
+          <span>Postal Directory</span>
+        </button>
+        <button class="tab-btn" data-tab="api" role="tab" aria-selected="false">
+          <span class="tab-icon">⚡</span>
+          <span>API Playground</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+
+    <!-- Synthetic Testing Data Notice Banner -->
+    <div class="test-data-notice-banner" role="alert">
+      <div class="notice-icon">⚠️</div>
+      <div class="notice-body">
+        <strong class="notice-title">Notice: Synthetic Testing Data Only</strong>
+        <p class="notice-text">
+          The postal codes, regions, cities, and districts provided on this platform are <strong>not genuine</strong> — they are <strong>generative for testing purposes only</strong>. This project accepts no responsibility for authenticity or real-world accuracy.
+        </p>
+      </div>
+      <div class="notice-badge">TEST DATA ONLY</div>
+    </div>
+
+    <!-- ================= TAB 1: SINGLE LOOKUP ================= -->
+    <section id="tab-lookup" class="tab-content active">
+      <div class="hero-section">
+        <div class="hero-badge">🇹🇿 Tanzania Postal Code Directory & Verification</div>
+        <h2 class="hero-title">Instant Location Lookup by Pincode</h2>
+        <p class="hero-desc">
+          Enter any 6-digit Tanzanian postal code to instantly resolve Region, City, and District data for checkout verification, address autocomplete, and logistics.
+        </p>
+      </div>
+
+      <!-- Search Card -->
+      <div class="card search-card">
+        <form id="singleLookupForm" class="lookup-form" onsubmit="return false;">
+          <div class="input-wrapper">
+            <span class="input-prefix">📮</span>
+            <input 
+              type="text" 
+              id="pincodeInput" 
+              class="pincode-input" 
+              placeholder="e.g. 123456" 
+              maxlength="6"
+              inputmode="numeric"
+              autocomplete="postal-code"
+              autofocus
+            >
+            <div class="input-badge" id="digitCounter">0/6</div>
+            <button type="button" id="clearInputBtn" class="clear-btn" title="Clear input" style="display:none;">✕</button>
+          </div>
+          <button type="submit" id="lookupSubmitBtn" class="btn btn-primary btn-search">
+            <span class="btn-spinner" style="display:none;"></span>
+            <span class="btn-text">Verify & Look Up</span>
+          </button>
+        </form>
+
+        <!-- Quick Sample Badges -->
+        <div class="samples-wrapper">
+          <span class="samples-label">Quick Test Samples:</span>
+          <div class="sample-chips" id="sampleChips">
+            <button class="chip" data-code="123456">123456 (Dar es Salaam - Ilala)</button>
+            <button class="chip" data-code="654321">654321 (Mwanza)</button>
+            <button class="chip" data-code="111111">111111 (Arusha)</button>
+            <button class="chip" data-code="222222">222222 (Dodoma)</button>
+            <button class="chip" data-code="444444">444444 (Kilimanjaro - Moshi)</button>
+            <button class="chip" data-code="666666">666666 (Zanzibar)</button>
+            <button class="chip" data-code="111010">111010 (Kinondoni)</button>
+            <button class="chip chip-invalid" data-code="999999">999999 (Unknown Test)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Container -->
+      <div id="lookupResultContainer" class="result-container" style="display:none;">
+        <!-- Filled dynamically by JavaScript -->
+      </div>
+
+      <!-- Code Integration Snippets -->
+      <div id="codeSnippetsSection" class="card code-card" style="display:none;">
+        <div class="code-header">
+          <div class="code-title">
+            <span class="code-icon">💻</span>
+            <span>Developer Integration Snippet</span>
+          </div>
+          <div class="code-tabs">
+            <button class="code-tab-btn active" data-lang="curl">cURL</button>
+            <button class="code-tab-btn" data-lang="js">JavaScript (Fetch)</button>
+            <button class="code-tab-btn" data-lang="python">Python</button>
+          </div>
+        </div>
+        <div class="code-body">
+          <pre><code id="codeSnippetBox"></code></pre>
+          <button class="btn btn-sm btn-outline copy-code-btn" id="copyCodeBtn" title="Copy snippet to clipboard">
+            <span>📋 Copy</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 2: CHECKOUT AUTOFILL DEMO ================= -->
+    <section id="tab-checkout" class="tab-content">
+      <div class="hero-section">
+        <div class="hero-badge">🛒 Live E-Commerce Simulation</div>
+        <h2 class="hero-title">Experience Automated Checkout Autofill</h2>
+        <p class="hero-desc">
+          See how your customers enjoy friction-free checkout. Entering a 6-digit postal code automatically populates Region, City, and District while dynamically updating delivery rates!
+        </p>
+      </div>
+
+      <div class="checkout-grid">
+        <!-- Customer Details & Address Form -->
+        <div class="card checkout-card">
+          <div class="card-header">
+            <h3>📦 Delivery & Shipping Address</h3>
+            <span class="step-indicator">Step 2 of 3</span>
+          </div>
+
+          <form id="checkoutForm" class="checkout-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="custName">Full Name</label>
+                <input type="text" id="custName" class="form-control" value="Baraka Mkwawa" placeholder="Your full name">
+              </div>
+              <div class="form-group flex-1">
+                <label for="custPhone">Phone Number</label>
+                <input type="tel" id="custPhone" class="form-control" value="+255 754 123 456" placeholder="+255 7XX XXX XXX">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="custStreet">Street / Building / Plot</label>
+              <input type="text" id="custStreet" class="form-control" value="Mlimani City Mall, Sam Nujoma Rd" placeholder="Street name, house/apartment number">
+            </div>
+
+            <!-- PINCODE AUTOLOADER FIELD -->
+            <div class="form-group pincode-feature-group">
+              <div class="pincode-label-row">
+                <label for="checkoutPincode">
+                  Postal / Pincode
+                  <span class="required-star">*</span>
+                </label>
+                <span class="autofill-tag">⚡ Auto-fills Region & District</span>
+              </div>
+              <div class="input-wrapper">
+                <span class="input-prefix">📮</span>
+                <input 
+                  type="text" 
+                  id="checkoutPincode" 
+                  class="pincode-input checkout-pin-input" 
+                  placeholder="Enter 6-digit pincode (e.g. 123456)" 
+                  maxlength="6"
+                  inputmode="numeric"
+                  autocomplete="postal-code"
+                >
+                <div class="checkout-pin-status" id="checkoutPinStatus"></div>
+              </div>
+              <div class="quick-checkout-pins">
+                <span>Try quick autofill:</span>
+                <button type="button" class="btn-link" onclick="window.setCheckoutPin('123456')">Dar es Salaam (123456)</button> •
+                <button type="button" class="btn-link" onclick="window.setCheckoutPin('111111')">Arusha (111111)</button> •
+                <button type="button" class="btn-link" onclick="window.setCheckoutPin('666666')">Zanzibar (666666)</button>
+              </div>
+            </div>
+
+            <!-- AUTOPOPULATED FIELDS -->
+            <div class="form-row autopop-row">
+              <div class="form-group flex-1">
+                <label for="checkoutRegion">Region</label>
+                <div class="input-with-icon">
+                  <input type="text" id="checkoutRegion" class="form-control autopop-field" placeholder="Auto-populated" readonly>
+                  <span class="field-status-icon" id="regionStatusIcon"></span>
+                </div>
+              </div>
+              <div class="form-group flex-1">
+                <label for="checkoutCity">City / Municipality</label>
+                <div class="input-with-icon">
+                  <input type="text" id="checkoutCity" class="form-control autopop-field" placeholder="Auto-populated" readonly>
+                  <span class="field-status-icon" id="cityStatusIcon"></span>
+                </div>
+              </div>
+              <div class="form-group flex-1">
+                <label for="checkoutDistrict">District</label>
+                <div class="input-with-icon">
+                  <input type="text" id="checkoutDistrict" class="form-control autopop-field" placeholder="Auto-populated" readonly>
+                  <span class="field-status-icon" id="districtStatusIcon"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Delivery Method</label>
+              <div class="delivery-options">
+                <label class="delivery-option active">
+                  <input type="radio" name="deliveryMethod" value="standard" checked>
+                  <div class="delivery-info">
+                    <span class="delivery-name">Standard Courier Delivery</span>
+                    <span class="delivery-time" id="deliveryEstimatedTime">Estimated: 1-2 Business Days</span>
+                  </div>
+                  <span class="delivery-price" id="deliveryPriceTag">TZS 5,000</span>
+                </label>
+                <label class="delivery-option">
+                  <input type="radio" name="deliveryMethod" value="express">
+                  <div class="delivery-info">
+                    <span class="delivery-name">Express Next-Flight / Same-Day</span>
+                    <span class="delivery-time">Priority door-to-door dispatch</span>
+                  </div>
+                  <span class="delivery-price" id="expressPriceTag">TZS 15,000</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="button" id="placeOrderBtn" class="btn btn-primary btn-block btn-lg">
+              <span>Complete Order with Autofilled Address</span>
+              <span class="arrow-icon">→</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Order Summary & Value Proposition -->
+        <div class="checkout-sidebar">
+          <div class="card order-summary-card">
+            <h3>🛒 Order Summary</h3>
+            <div class="cart-items">
+              <div class="cart-item">
+                <div class="cart-item-img">☕</div>
+                <div class="cart-item-details">
+                  <h4>Kilimanjaro AA Single-Origin Coffee</h4>
+                  <p>500g Whole Beans • Arabica</p>
+                  <span class="item-qty">Qty: 1</span>
+                </div>
+                <div class="cart-item-price">TZS 28,000</div>
+              </div>
+              <div class="cart-item">
+                <div class="cart-item-img">🦒</div>
+                <div class="cart-item-details">
+                  <h4>Serengeti Heritage Kanga Fabric</h4>
+                  <p>Authentic 100% Cotton Swahili Pattern</p>
+                  <span class="item-qty">Qty: 2</span>
+                </div>
+                <div class="cart-item-price">TZS 40,000</div>
+              </div>
+            </div>
+
+            <div class="cart-totals">
+              <div class="total-row">
+                <span>Items Subtotal:</span>
+                <span class="amount">TZS 68,000</span>
+              </div>
+              <div class="total-row">
+                <span>Shipping to <strong id="summaryDest">Dar es Salaam</strong>:</span>
+                <span class="amount" id="summaryShipping">TZS 5,000</span>
+              </div>
+              <div class="total-divider"></div>
+              <div class="total-row grand-total">
+                <span>Grand Total:</span>
+                <span class="amount highlight" id="summaryGrandTotal">TZS 73,000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Spotlight -->
+          <div class="card feature-card">
+            <h4>💡 Why Pincode Autofill Matters</h4>
+            <ul class="feature-checklist">
+              <li>
+                <span class="check-icon">✓</span>
+                <span><strong>Zero Typo Errors:</strong> Eliminates misspelled region and district names in dispatch slips.</span>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <span><strong>Higher Checkout Conversion:</strong> Reduces customer form-fill friction by 40%.</span>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <span><strong>Precise Courier Routing:</strong> Accurately assigns regional courier partners and zones.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 3: BULK LOOKUP ================= -->
+    <section id="tab-bulk" class="tab-content">
+      <div class="hero-section">
+        <div class="hero-badge">📦 Batch API Processing</div>
+        <h2 class="hero-title">Bulk Pincode Validation & Lookup</h2>
+        <p class="hero-desc">
+          Verify up to 10 postal codes in a single request. Perfect for warehouse batch verification, logistics manifest reconciliation, and customer address databases.
+        </p>
+      </div>
+
+      <div class="card bulk-card">
+        <div class="bulk-input-header">
+          <label for="bulkPincodesInput">Enter Postal Codes (comma or newline separated, max 10):</label>
+          <span class="bulk-counter" id="bulkCounter">0 / 10 pincodes</span>
+        </div>
+
+        <textarea 
+          id="bulkPincodesInput" 
+          class="bulk-textarea" 
+          rows="4" 
+          placeholder="e.g. 123456, 654321, 111111, 222222, 666666"
+        ></textarea>
+
+        <div class="bulk-presets">
+          <span>Presets:</span>
+          <button class="chip" id="presetMajorCities">Major Metros (Dar, Arusha, Mwanza, Dodoma)</button>
+          <button class="chip" id="presetCoast">Coastal & Islands (Zanzibar, Tanga, Ilala)</button>
+          <button class="chip" id="presetMixed">Mixed (Includes Missing)</button>
+        </div>
+
+        <div class="bulk-actions">
+          <button id="bulkSubmitBtn" class="btn btn-primary">
+            <span class="btn-spinner" style="display:none;"></span>
+            <span>Run Batch Lookup</span>
+          </button>
+          <button id="bulkClearBtn" class="btn btn-outline">Clear</button>
+        </div>
+      </div>
+
+      <!-- Bulk Results Area -->
+      <div id="bulkResultsContainer" class="bulk-results-wrapper" style="display:none;">
+        <div class="bulk-metrics-bar">
+          <div class="metric-card found">
+            <span class="metric-num" id="bulkFoundCount">0</span>
+            <span class="metric-label">Found Locations</span>
+          </div>
+          <div class="metric-card missing">
+            <span class="metric-num" id="bulkMissingCount">0</span>
+            <span class="metric-label">Unmapped / Missing</span>
+          </div>
+          <div class="bulk-export-buttons">
+            <button class="btn btn-sm btn-outline" id="exportCsvBtn">📥 Export CSV</button>
+            <button class="btn btn-sm btn-outline" id="exportJsonBtn">📥 Export JSON</button>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <div class="table-responsive">
+            <table class="data-table" id="bulkDataTable">
+              <thead>
+                <tr>
+                  <th>Pincode</th>
+                  <th>Status</th>
+                  <th>Region</th>
+                  <th>City</th>
+                  <th>District</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bulkTableBody">
+                <!-- Rows injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 4: DIRECTORY EXPLORER ================= -->
+    <section id="tab-directory" class="tab-content">
+      <div class="hero-section">
+        <div class="hero-badge">🗺️ Tanzania Postal Directory</div>
+        <h2 class="hero-title">Browse Registered Postal Zones</h2>
+        <p class="hero-desc">
+          Explore all currently registered postal codes in the dataset. Filter by region, city, or district name.
+        </p>
+      </div>
+
+      <!-- Filter and Search Toolbar -->
+      <div class="card directory-toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="directorySearchInput" placeholder="Filter by region, city, district, or pincode...">
+          <button class="clear-search-btn" id="directoryClearSearch" style="display:none;">✕</button>
+        </div>
+
+        <div class="region-filters" id="regionFiltersBar">
+          <button class="filter-pill active" data-region="ALL">All Regions (<span id="totalDirCount">0</span>)</button>
+          <!-- Dynamic region pills loaded here -->
+        </div>
+      </div>
+
+      <!-- Directory Cards Grid -->
+      <div class="directory-grid" id="directoryGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ================= TAB 5: API PLAYGROUND ================= -->
+    <section id="tab-api" class="tab-content">
+      <div class="hero-section">
+        <div class="hero-badge">⚡ Developer Hub</div>
+        <h2 class="hero-title">API Playground & Live Health</h2>
+        <p class="hero-desc">
+          Test the REST API endpoints directly, inspect raw responses, and check server response latency.
+        </p>
+      </div>
+
+      <div class="playground-grid">
+        <!-- Endpoints Directory -->
+        <div class="card endpoints-card">
+          <h3>📚 Available Endpoints</h3>
+          <div class="endpoint-list">
+            <div class="endpoint-item" onclick="window.loadPlaygroundEndpoint('GET', '/pincode/123456')">
+              <span class="http-badge get">GET</span>
+              <span class="endpoint-path">/pincode/{code}</span>
+              <span class="endpoint-desc">Single 6-digit lookup</span>
+            </div>
+            <div class="endpoint-item" onclick="window.loadPlaygroundEndpoint('POST', '/pincodes', '{\n  \"pincodes\": [\"123456\", \"654321\", \"111111\"]\n}')">
+              <span class="http-badge post">POST</span>
+              <span class="endpoint-path">/pincodes</span>
+              <span class="endpoint-desc">Bulk lookup (max 10)</span>
+            </div>
+            <div class="endpoint-item" onclick="window.loadPlaygroundEndpoint('GET', '/pincodes/all')">
+              <span class="http-badge get">GET</span>
+              <span class="endpoint-path">/pincodes/all</span>
+              <span class="endpoint-desc">List all available records</span>
+            </div>
+            <div class="endpoint-item" onclick="window.loadPlaygroundEndpoint('GET', '/api/health')">
+              <span class="http-badge get">GET</span>
+              <span class="endpoint-path">/api/health</span>
+              <span class="endpoint-desc">Server health & stats</span>
+            </div>
+            <div class="endpoint-item" onclick="window.loadPlaygroundEndpoint('GET', '/api')">
+              <span class="http-badge get">GET</span>
+              <span class="endpoint-path">/api</span>
+              <span class="endpoint-desc">API metadata & discovery</span>
+            </div>
+          </div>
+
+          <div class="api-links-group">
+            <a href="/docs" target="_blank" class="btn btn-outline btn-block">
+              <span>📖 Open Interactive Swagger UI (/docs)</span>
+            </a>
+            <a href="/redoc" target="_blank" class="btn btn-outline btn-block">
+              <span>📑 Open ReDoc Specification (/redoc)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Runner Console -->
+        <div class="card console-card">
+          <div class="console-header">
+            <h3>⚡ API Request Console</h3>
+            <div class="live-ping-indicator" id="consolePing">
+              <span>Ping:</span>
+              <strong id="pingDuration">-- ms</strong>
+            </div>
+          </div>
+
+          <div class="console-form">
+            <div class="request-bar">
+              <select id="consoleMethod" class="method-select">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+              </select>
+              <input type="text" id="consoleUrl" class="console-url-input" value="/pincode/123456">
+              <button id="consoleSendBtn" class="btn btn-primary">Send</button>
+            </div>
+
+            <div class="request-body-wrapper" id="requestBodyWrapper" style="display:none;">
+              <label for="consoleRequestBody">Request Body (JSON):</label>
+              <textarea id="consoleRequestBody" class="console-textarea" rows="4"></textarea>
+            </div>
+
+            <div class="response-section">
+              <div class="response-header">
+                <span>Response Output</span>
+                <span class="status-code-badge" id="responseStatusBadge">Status: Ready</span>
+              </div>
+              <pre class="response-pre"><code id="consoleResponseBody">// Click "Send" or select an endpoint on the left to test live response</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Success Order Modal (for Checkout demo) -->
+  <div id="orderSuccessModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-icon">🎉</div>
+      <h3>Order Placed Successfully!</h3>
+      <p class="modal-subtitle">Delivery address confirmed with Tanzanian Pincode Verification.</p>
+      <div class="modal-details" id="orderModalDetails">
+        <!-- Injected dynamically -->
+      </div>
+      <button class="btn btn-primary btn-block" onclick="document.getElementById('orderSuccessModal').style.display='none'">
+        Awesome, Close Simulation
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <p>🇹🇿 <strong>Tanzania Pincodes Lookup</strong> • Lightweight postal code verification service.</p>
+        <p class="footer-note">Built with FastAPI & Modern JavaScript • Integrated with Wagtail brand aesthetics</p>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/Ibrahist/emtaa" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+        <span class="dot">•</span>
+        <a href="/docs" target="_blank">Swagger Docs</a>
+        <span class="dot">•</span>
+        <button class="btn-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to Top ↑</button>
+      </div>
+    </div>
+    <div class="footer-notice-bar">
+      <span>⚠️ <strong>Disclaimer:</strong> The location & pincode data used in this service are generative test data and not genuine. Strictly for testing purposes only.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
